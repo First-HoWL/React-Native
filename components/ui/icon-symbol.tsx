@@ -19,7 +19,7 @@ const MAPPING = {
   'chevron.left.forwardslash.chevron.right': 'code',
   'chevron.right': 'chevron-right',
 
-  'ac': 'accessible-forward',
+  'ac': 'accessible-forward', // название случайное, если на ios не работает поменять на коректное
   'textformat.123.ar': '123',
   'person.fill': 'person', 
   'gearshape.fill': 'settings',
