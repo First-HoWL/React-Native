@@ -8,10 +8,10 @@ export function HelloWave() {
         lineHeight: 32,
         marginTop: -6,
         animationName: {
-          '50%': { transform: [{ rotate: '25deg' }] },
+          '50%': { transform: [{ rotate: '400deg' }] },
         },
         animationIterationCount: 4,
-        animationDuration: '300ms',
+        animationDuration: '1300ms',
       }}>
       👋
     </Animated.Text>

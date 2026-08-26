@@ -24,6 +24,13 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="page"
+        options={{
+          title: 'Page 1',
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="ac" color={color} />,
+        }}
+      />
+      <Tabs.Screen
         name="explore"
         options={{
           title: 'Explore',
