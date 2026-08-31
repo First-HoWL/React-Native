@@ -1,11 +1,13 @@
-import { Image } from 'expo-image';
-import { StyleSheet } from 'react-native';
-
 import ParallaxScrollView from '@/components/parallax-scroll-view';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
+import { Image } from 'expo-image';
+import { useState } from 'react';
+import { Pressable, StyleSheet } from 'react-native';
 
 export default function Page1() {
+  const [count, setCount] = useState(0);
+
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
@@ -30,9 +32,19 @@ export default function Page1() {
       <ThemedView style={styles.text}>
         <ThemedText>A linear equation is any equation that can be written in the form</ThemedText>
       </ThemedView>
+      
+      <ThemedView style={styles.text}>
+        <Pressable onPress={() => {setCount(0)}}>
+          <ThemedText style={count == 0? styles.marked: {}}>0</ThemedText>
+        </Pressable>
+      </ThemedView>
+
+
 
       <ThemedView style={[styles.container, styles.text]}>
-        <ThemedText style={styles.marked}>ax + b = 0</ThemedText>
+        <Pressable onPress={() => {count + 1 > 10 ? alert("Limit reached") : setCount(count + 1)}}>
+          <ThemedText style={styles.marked}>ax + b = {count}</ThemedText>
+        </Pressable>
       </ThemedView>
 
       <ThemedView style={styles.text}>
@@ -45,6 +57,12 @@ export default function Page1() {
           />
       </ThemedView>
       
+      <ThemedView style={[styles.container, styles.text]}>
+        <Pressable onPress={() => {count - 1 < 0 ? alert("Limit reached") : setCount(count - 1)}}>
+          <ThemedText style={styles.marked}>- - -</ThemedText>
+        </Pressable>
+      </ThemedView>
+
     </ParallaxScrollView>
   );
 }
