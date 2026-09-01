@@ -10,34 +10,9 @@ import {
     TextInput, View
 } from 'react-native';
 
-function BlockOfLift({number, count, setCount}: {number: number, count: number, setCount: (value: number) => void}){
-    return(
-        <ThemedView style={styles.block}>
-        <Pressable onPress={() => {setCount(number)}}>
-          <ThemedText style={count == number? styles.marked: styles.unmarked}>{number}</ThemedText>
-        </Pressable>
-      </ThemedView>
-    )
-}
-function ItemList({ count, setCount}: {count: number, setCount: (value: number) => void}) {
-  const listItems = [];
-
-  for (let i = 0; i < 11; i++) {
-    listItems.push(<BlockOfLift key={i} number={i} count={count} setCount={setCount}/>);
-  }
-
-  return (
-    <ThemedView style={[styles.container, styles.text]}>
-      {listItems}
-    </ThemedView>
-    );
-}
-
-
 export default function PageScreen() {
     const [elem, setelem] = useState([] as {id: number, name: string}[]);
     const [inputValue, setInputValue] = useState("");
-    var ids = 1;
     return (
         <ThemedView style={styles.main}>
             <View style={ styles.view }>
