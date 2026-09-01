@@ -29,30 +29,45 @@ export default function PageScreen() {
                     value={inputValue}
                     onChangeText={setInputValue}
                 />
-                <Button 
-                    title="Guess"
-                    onPress={() => {
-                        if (inputValue === "") {
-                            alert("Please enter a number.");
-                            return;
-                        }
-                        if (parseInt(inputValue) === rnd) {
-                            setelem([{name: "Congratulations! You guessed the number!", code: 0}, ...elem])
-                            alert("Congratulations! You guessed the number!");
-                        }
-                        else if (parseInt(inputValue) < rnd) {
-                            setelem([{name: `${inputValue} is too low! Try again.`, code: 1}, ...elem])
-                        }
-                        else if (parseInt(inputValue) > rnd){
-                            setelem([{name: `${inputValue} is too high! Try again.`, code: 2}, ...elem])
-                        }
-                        else {
-                            alert("Please enter a number.");
-                        }
-                        setInputValue("")
-                        console.log(rnd)
-                    }}
-                />
+                <View style={ styles.lineBlock }>
+                    <View style={ styles.buttonBlock }>
+                        <Button 
+                            title="Guess"
+                            onPress={() => {
+                                if (inputValue === "") {
+                                    alert("Please enter a number.");
+                                    return;
+                                }
+                                if (parseInt(inputValue) === rnd) {
+                                    setelem([{name: "Congratulations! You guessed the number!", code: 0}, ...elem])
+                                    alert("Congratulations! You guessed the number!");
+                                }
+                                else if (parseInt(inputValue) < rnd) {
+                                    setelem([{name: `${inputValue} is too low! Try again.`, code: 1}, ...elem])
+                                }
+                                else if (parseInt(inputValue) > rnd){
+                                    setelem([{name: `${inputValue} is too high! Try again.`, code: 2}, ...elem])
+                                }
+                                else {
+                                    alert("Please enter a number.");
+                                }
+                                setInputValue("")
+                                console.log(rnd)
+                            }}
+                        />
+                    </View>
+                    <View style={ styles.buttonBlock }>
+                        <Button 
+                            title="Restart"
+                            onPress={() => {
+                                setInputValue("")
+                                setRnd(Math.floor(Math.random() * 100) + 1);
+                                setelem([])
+                                console.log(rnd)
+                            }}
+                        />
+                    </View>
+                </View>
             </View>
 
             <ThemedView style={[styles.container, styles.text]}>
@@ -110,6 +125,9 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         marginBottom: 10,
+    },
+    buttonBlock:{
+        marginHorizontal: 10,
     },
     blockInLine:{
         //flexDirection: "column",
