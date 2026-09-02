@@ -1,24 +1,28 @@
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
+import { images } from '@/db/info';
 import { Image } from 'expo-image';
-import { StyleSheet } from 'react-native';
+import { Link } from 'expo-router';
+import { FlatList, StyleSheet } from 'react-native';
+
 
 type BlockOfImageProps = {
+  id: number;
   img: string;
   title: string;
   smallTitle: string;
 };
 
 
-function BlockOfImage({img, title, smallTitle }: BlockOfImageProps){
+function BlockOfImage({id, img, title, smallTitle }: BlockOfImageProps){
     return(
-        <ThemedView style={styles.genblock} >
-                <Image source={img} style={styles.image}/>
-                <ThemedView style={styles.block}>
-                    <ThemedText style={styles.title} numberOfLines={1} ellipsizeMode="tail">{title}</ThemedText >
-                    <ThemedText style={styles.smallTitle} numberOfLines={2} ellipsizeMode="tail">{smallTitle}</ThemedText>
-                </ThemedView>
-            </ThemedView>
+      <Link href={`/${id}`} style={styles.genblock} > 
+        <Image source={img} style={styles.image}/>
+        <ThemedView style={styles.block}>
+            <ThemedText style={styles.title} numberOfLines={1} ellipsizeMode="tail">{title}</ThemedText >
+            <ThemedText style={styles.smallTitle} numberOfLines={2} ellipsizeMode="tail">{smallTitle}</ThemedText>
+        </ThemedView>
+      </Link>
     )
 }
 
@@ -26,10 +30,14 @@ export default function Images() {
   return (
     <>
         <ThemedView style={styles.main}>
-            <BlockOfImage img={require("@/assets/images/react-logo.png")} title="React Native" smallTitle="Создание мобильных приложений"/>
-            <BlockOfImage img={require("@/assets/images/android-icon-monochrome.png")} title="React Native" smallTitle="Создание мобильных приложений"/>
-            <BlockOfImage img={require("@/assets/images/splash-icon.png")} title="React Native" smallTitle="Создание мобильных приложений"/>
-            <BlockOfImage img={require("@/assets/images/partial-react-logo.png")} title="React Native" smallTitle="Создание мобильных приложений"/>
+            <FlatList data={images} renderItem={({ item }) => (
+                <BlockOfImage
+                    id={item.id}
+                    img={item.img}
+                    title={item.title}
+                    smallTitle={item.smallTitle}
+                />
+            )}/>
         </ThemedView>
     </>
   );
