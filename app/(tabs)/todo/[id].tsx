@@ -17,7 +17,7 @@ export default function DetailTodo() {
                     <Text style={styles.backButton}>Back</Text>
                 </Pressable>
                 <View style={styles.headerIcons}>
-                    <Image source={require('@/assets/images/clocks.png')} style={styles.icon} />
+                    <Image source={require('@/assets/images/clock.png')} style={styles.icon} />
                     <Pressable onPress={() => {}}>
                         <Image source={require('@/assets/images/edit.png')} style={styles.icon} />
                     </Pressable>
