@@ -57,6 +57,7 @@ export default function ShopScreen() {
     const [total, setTotal] = useState(0);
 
     const handleBuy = (product: { id: string; name: string; price: number }) => {
+        console.log(`Користувач купив: ${product.name} за ${product.price} грн`);
         setTotal((prev) => prev + product.price);
     };
 
