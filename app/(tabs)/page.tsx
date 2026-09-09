@@ -1,5 +1,6 @@
+import { Image } from 'expo-image';
 import { createContext, useContext, useState } from 'react';
-import { Button, FlatList, StyleSheet, Text, View } from 'react-native';
+import { Button, FlatList, StyleSheet, Text, View, useWindowDimensions } from 'react-native';
 
 type CartContextValue = {
     total: number;
@@ -16,11 +17,11 @@ function useCart() {
 }
 
 const PRODUCTS = [
-    { id: '1', name: 'Ноутбук', price: 25000 },
-    { id: '2', name: 'Смартфон', price: 12000 },
-    { id: '3', name: 'Навушники', price: 1500 },
-    { id: '4', name: 'Клавіатура', price: 900 },
-    { id: '5', name: 'Монітор', price: 7000 },
+    { id: '1', img: require('../../assets/images/laptop.webp'), name: 'Ноутбук', price: 55000 },
+    { id: '2', img: require('../../assets/images/iphone.webp'), name: 'Смартфон', price: 60000 },
+    { id: '3', img: require('../../assets/images/headphones.webp'), name: 'Навушники', price: 1800 },
+    { id: '4', img: require('../../assets/images/keyboard.webp'), name: 'Клавіатура', price: 2900 },
+    { id: '5', img: require('../../assets/images/monitor.webp'), name: 'Монітор', price: 49000 },
 ];
 
 function CartWidget() {
@@ -41,9 +42,11 @@ function Header() {
     );
 }
 
-function ProductItem({ product, onBuy }: { product: { id: string; name: string; price: number }; onBuy: (product: { id: string; name: string; price: number }) => void }) {
+
+function ProductItem({ product, onBuy }: { product: { id: string; img: string; name: string; price: number }; onBuy: (product: { id: string; img: string; name: string; price: number }) => void }) {
     return (
         <View style={styles.productItem}>
+            <Image source={product.img} style={styles.image}/>
             <View>
                 <Text style={styles.productName}>{product.name}</Text>
                 <Text style={styles.productPrice}>{product.price} грн</Text>
@@ -55,8 +58,11 @@ function ProductItem({ product, onBuy }: { product: { id: string; name: string; 
 
 export default function ShopScreen() {
     const [total, setTotal] = useState(0);
+    const WindowSize = useWindowDimensions();
+    const columns = WindowSize.width <= 500 ? 1 : WindowSize.width <= 800 ? 2 : 3;
 
-    const handleBuy = (product: { id: string; name: string; price: number }) => {
+
+    const handleBuy = (product: { id: string; img: string; name: string; price: number }) => {
         console.log(`Користувач купив: ${product.name} за ${product.price} грн`);
         setTotal((prev) => prev + product.price);
     };
@@ -79,6 +85,10 @@ export default function ShopScreen() {
 const styles = StyleSheet.create({
     container: {
         justifyContent: 'center',
+    },
+    image:{
+        height: 100,
+        width: 100,
     },
     containerHeader: {
         backgroundColor: 'darkgray',
